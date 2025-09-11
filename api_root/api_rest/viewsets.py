@@ -4,11 +4,11 @@ from .models import EnderecoCep
 import requests
 
 class EnderecoCepViewSet(viewsets.ModelViewSet):
-    queryset = EnderecoCep
+    queryset = EnderecoCep.objects.all()
     serializer_class = EnderecoCepSerializer
 
     def perform_create(self, serializer):
-        cep = serializer.validate_data['cep']
+        cep = serializer.validated_data['cep']
         url = f"https://viacep.com.br/ws/{cep}/json/"
         response = requests.get(url)
 
